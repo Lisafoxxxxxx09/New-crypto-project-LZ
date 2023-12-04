@@ -1,0 +1,17 @@
+  if (
+    bugReportIssue.title?.toLocaleLowerCase() !==
+    `v${releaseVersionNumber} Bug Report`.toLocaleLowerCase()
+  ) {
+    throw new Error(
+      `Unexpected bug report title: "${bugReportIssue.title}" instead of "v${releaseVersionNumber} Bug Report"`,
+    );
+  }
+
+  // something special
+  async function main(): Promise<void> {
+  // "GITHUB_TOKEN" is an automatically generated, repository-specific access token provided by GitHub Actions.
+  const githubToken = process.env.GITHUB_TOKEN;
+  if (!githubToken) {
+    core.setFailed('GITHUB_TOKEN not found');
+    process.exit(1);
+  }
